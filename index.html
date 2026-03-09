@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlimit AI Education</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        unlimit: {
+                            bg: '#ffffff',
+                            text: '#0f172a',
+                            textLight: '#475569',
+                            lime: '#bef264',
+                            limeDark: '#65a30d',
+                            teal: '#2dd4bf',
+                            cyan: '#67e8f9',
+                            purple: '#7c3aed',
+                            purpleLight: '#c4b5fd',
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['"Space Mono"', 'monospace'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            from: { opacity: 0, transform: 'translateY(10px)' },
+                            to: { opacity: 1, transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        .aurora-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #ffffff;
+            z-index: -10;
+            overflow: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+
+        .visual-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .visual-card:hover {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: #bef264;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-gradient-purple {
+            background: linear-gradient(135deg, #7c3aed, #4f46e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-font {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-unlimit-lime selection:text-unlimit-text min-h-screen flex flex-col relative">
+
+    <!-- Fluid Background -->
+    <div class="aurora-bg pointer-events-none">
+        <div class="absolute top-[-20%] right-[-10%] w-[60%] h-[60%] bg-gradient-to-b from-unlimit-lime to-unlimit-teal opacity-30 rounded-full blur-[120px] animate-blob"></div>
+        <div class="absolute bottom-[-20%] left-[-10%] w-[50%] h-[50%] bg-gradient-to-t from-unlimit-cyan to-unlimit-teal opacity-30 rounded-full blur-[100px] animate-blob" style="animation-delay: 2s;"></div>
+        <div class="absolute top-[40%] left-[40%] w-[30%] h-[30%] bg-unlimit-purpleLight opacity-20 rounded-full blur-[80px] animate-blob" style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 w-full px-6 py-4 glass-panel border-b-0 border-white/40 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="showHome()">
+                <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHlzNnQI6YDfw/company-logo_200_200/B4EZeb1ReUHwAM-/0/1750666124260/unlimit_com_logo?e=2147483647&v=beta&t=81cbbegrtED5_riVrnnJPx3K-dzSjFCJY8BSairdJAs" alt="Unlimit Logo" class="w-10 h-10 rounded-md shadow-sm">
+                <span class="logo-font text-xl md:text-2xl font-bold text-slate-800 tracking-tight">Unlimit <span class="text-unlimit-purple">AI Education</span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow w-full max-w-7xl mx-auto px-4 py-8 md:py-12 relative z-30">
+        
+        <div id="home-view" class="space-y-20 animate-fade-in">
+            <!-- ================= ROLES VIEW (Learning Paths) ================= -->
+            <div>
+                <div class="text-center mb-12 md:mb-16">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 drop-shadow-sm mb-4">Learn AI by Role</h2>
+                    <p class="text-lg text-slate-600 font-mono">Select a role to discover curated AI tools and learning paths.</p>
+                </div>
+                <div id="roles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <!-- Role cards injected here -->
+                </div>
+            </div>
+
+            <!-- ================= WEBINARS VIEW ================= -->
+            <div>
+                <div class="text-center mb-12 md:mb-16">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 drop-shadow-sm mb-4">Internal Webinars & Courses</h2>
+                    <p class="text-lg text-slate-600 font-mono">Exclusive resources and recordings from our team.</p>
+                </div>
+                <div id="webinars-container" class="space-y-10">
+                    <!-- Webinars injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TOOLS VIEW (Inside a Role) ================= -->
+        <div id="tools-view" class="hidden animate-fade-in">
+            <div class="mb-8">
+                <button onclick="showHome()" class="flex items-center text-unlimit-purple font-semibold hover:text-indigo-800 transition-colors bg-white/50 px-4 py-2 rounded-lg backdrop-blur-sm border border-white">
+                    <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+                    Back to Home
+                </button>
+            </div>
+            <div class="mb-12 glass-panel p-8 rounded-2xl flex flex-col md:flex-row items-center md:items-start gap-6">
+                <div id="tools-role-icon" class="p-4 bg-white rounded-xl shadow-sm text-unlimit-teal border border-slate-100 shrink-0">
+                    <!-- Icon injected here -->
+                </div>
+                <div>
+                    <h2 id="tools-view-title" class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2"></h2>
+                    <p id="tools-view-desc" class="text-lg text-slate-600 font-medium"></p>
+                </div>
+            </div>
+            <div id="tools-container" class="space-y-12">
+                <!-- Tool sections injected here -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-panel border-t border-white/50 mt-auto py-6 relative z-30">
+        <div class="container mx-auto text-center text-slate-500 font-mono text-sm">
+            <p>&copy; 2026 Unlimit. Transform the way you work.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA OBJECTS ---
+        
+        const educationData = {
+            "Developer": {
+                icon: 'terminal',
+                description: "Accelerate development with AI coding assistants for writing, testing, and understanding code.",
+                tools: {
+                    "Claude Code": {
+                        icon: 'https://nikiforovall.blog/claude-code-rules/img/cc.png',
+                        lucideIcon: 'code-2',
+                        lessons: [
+                            { title: "Building headless automation with Claude Code", url: "https://youtu.be/dRsjO-88nBs", desc: "Code w/ Claude - Learn how to build headless automation directly using Claude Code." },
+                            { title: "Prompting for Agents", url: "https://youtu.be/XSZP9GhhuAc", desc: "Code w/ Claude - A deep dive into prompting strategies specifically for building AI agents." },
+                            { title: "Vibe coding in prod", url: "https://youtu.be/fHWFF_pnqDk", desc: "Code w/ Claude - This Anthropic talk explores responsible 'vibe coding' in production, addressing potential pitfalls and offering practical strategies for verifiable checkpoints." },
+                            { title: "Mastering Claude Code in 30 minutes", url: "https://youtu.be/6eBSHbLKuN0", desc: "Learn advanced Claude Code features, shortcuts, and workflows. Covers setup, codebase Q&A, and code editing with helpful examples." },
+                            { title: "Claude Code - Full Tutorial for Beginners", url: "https://youtu.be/ntDIxaeo3Wg", desc: "Walks through the setup, installation, best practices, and multiple features to generate insane outputs and awesome coding projects." },
+                            { title: "OpenAI Codex in ChatGPT in 5 Minutes", url: "https://youtu.be/Kd0QGZMy_tAA", desc: "A rapid introduction to Codex’s main features—writing code, fixing bugs, and running tests—all from within ChatGPT." },
+                        ]
+                    }
+                }
+            },
+            "Security Engineer": {
+                icon: 'shield-alert',
+                description: "Automate security operations, triage alerts, and respond to threats with powerful workflows.",
+                tools: {
+                    "n8n for SecOps": {
+                        icon: 'https://n8n.io/favicon.ico',
+                        lucideIcon: 'lock',
+                        lessons: [
+                            { title: "Applying Automation to Security Use Cases", url: "https://youtu.be/dNfV0NWnvcI", desc: "Wes Lambert discusses automating security operations to reduce alert fatigue and automate repetitive tasks." },
+                            { title: "How to Start Automation - The easy way!", url: "https://youtu.be/vRTGU_T9H58", desc: "Build a workflow to investigate a suspicious domain by checking VirusTotal, DNS, and AbuseIPDB." },
+                            { title: "SOARLab - Security Onion + Automation", url: "https://www.youtube.com/watch?v=slCvK14NGwQ", desc: "Demonstrates an integrated system using free tools for automated threat response." },
+                            { title: "How to Self-Host n8n securely", url: "https://youtu.be/yWKjRsPpvZI", desc: "Step-by-step guide on securely self-hosting an n8n automation environment with security hardening." },
+                            { title: "Automating Cyber Threat Detection", url: "https://youtu.be/GEEHyxPiSgg", desc: "Demonstrates an AI agent detecting and responding to threats like 'impossible travel' in Okta logs." },
+                            { title: "SecOps Templates", url: "https://n8n.io/workflows/categories/secops/", desc: "Explore official templates to automate SIEM & EDR response, proactive threat hunting, and email security." },
+                        ]
+                    }
+                }
+            },
+            "QA Engineer": {
+                icon: 'microscope',
+                description: "Leverage AI for test automation, visual regression testing, and improving software quality.",
+                tools: {
+                    "n8n for TestOps": {
+                        icon: 'https://n8n.io/favicon.ico',
+                        lucideIcon: 'check-circle-2',
+                        lessons: [
+                            { title: "Unit Testing Framework for n8n", url: "https://youtu.be/W_HvwpFdhYg", desc: "Introduction to a custom unit testing framework for n8n to catch bugs early in workflows." },
+                            { title: "Automate UI QA with AI and n8n", url: "https://youtu.be/3N6K2V9aXKs", desc: "Learn about an AI tool using Playwright to automate web-based tasks like QA testing with natural language." },
+                            { title: "Visual Regression Testing with AI", url: "https://n8n.io/workflows/2419-visual-regression-testing-with-apify-and-ai-vision-model/", desc: "Use multimodal LLMs to perform a visual comparison of webpage screenshots." },
+                            { title: "Automatic Jest Test Generation", url: "https://n8n.io/workflows/4013-automatic-jest-test-generation-for-github-prs-with-dual-ai-review/", desc: "A workflow that auto-generates Jest tests via AI for PRs, reviewed by a second AI." },
+                        ]
+                    }
+                }
+            },
+             "DevOps": {
+                icon: 'infinity',
+                description: "Automate CI/CD pipelines, infrastructure monitoring, incident management, and backups.",
+                tools: {
+                    "n8n for DevOps": {
+                        icon: 'https://n8n.io/favicon.ico',
+                        lucideIcon: 'server',
+                        lessons: [
+                            { title: "Top 73 DevOps automation workflows", url: "https://n8n.io/workflows/categories/devops/", desc: "Explore official templates to automate CI/CD, monitor infrastructure, and automate backups." },
+                            { title: "Package Workflows Into Full Web Apps", url: "https://youtu.be/aUr9RBXr5Wo", desc: "Transform standalone n8n automations into fully functional web applications." },
+                            { title: "Build a FULL Stack App for AI Agent", url: "https://youtu.be/JyolNYRbAcs", desc: "A 20-minute guide to building a full-stack application for your n8n AI agent." },
+                            { title: "Streamlining DevOps Support", url: "https://medium.com/@aiyajk/streamlining-devops-support-how-i-automated-ticket-distribution-for-our-team-using-n8n-and-64e91f45868c", desc: "Automate ticket distribution for a support team using n8n and the Slack API." },
+                        ]
+                    }
+                }
+            },
+             "Designer": {
+                icon: 'palette',
+                description: "Accelerate UI/UX workflows with AI-driven design generation, iteration, and coding.",
+                tools: {
+                    "Figma AI": {
+                        icon: 'https://static.figma.com/app/icon/1/icon-192.png',
+                        lucideIcon: 'pen-tool',
+                        lessons: [
+                            { title: "Figma AI in 2025: First Look", url: "https://youtu.be/DZjaFMrz0e0", desc: "A preview of Figma’s AI capabilities: generate design drafts and refine layouts to reduce manual effort." },
+                            { title: "Official Figma AI tutorial", url: "https://help.figma.com/hc/en-us/articles/23870272542231-Use-AI-tools-in-Figma-Design", desc: "Enable and navigate Figma AI features like First Draft, text generation, and image editing." },
+                            { title: "How To Use AI To Convert Figma into Code", url: "https://youtu.be/3BUIIKh8DfI", desc: "AI-powered tools that translate Figma layouts into production-ready HTML, CSS, or React code." },
+                            { title: "Lovable x Figma Integration", url: "https://www.youtube.com/watch?v=c_qnRGzQUxA", desc: "Use the new integration between Lovable and Figma to generate UI components with natural-language." }
+                        ]
+                    }
+                }
+            },
+            "Everyone": {
+                icon: 'globe',
+                description: "Foundational AI skills for all roles to boost productivity across Google Workspace, note-taking, and more.",
+                tools: {
+                    "General AI Skills": {
+                        icon: 'https://n8n.io/favicon.ico',
+                        lucideIcon: 'zap',
+                        lessons: [
+                            { title: "n8n Beginner Course", url: "https://youtu.be/4BVTkqbn_tY", desc: "Introduction to automation principles. Learn about triggers, filtering, and mapping workflows." },
+                            { title: "n8n Advanced Course", url: "https://youtu.be/TFTLMQLozCI?list=PLlET0GsrLUL5bxmx5c1H1Ms_OtOPYZIEG", desc: "Data flows, multiple branches, using Merge node, and managing API rate limits." },
+                            { title: "n8n Masterclass", url: "https://youtu.be/ZHH3sr234zY", desc: "From beginner to building AI agents. Covers RAG and OpenAI integrations." },
+                        ]
+                    },
+                    "Google Gemini": {
+                        icon: 'https://www.gstatic.com/images/branding/product/1x/gemini_48dp.png',
+                        lucideIcon: 'sparkles',
+                        lessons: [
+                            { title: "Gemini 101 & Workspace Integration", url: "https://youtu.be/6nOrhMoYpgA", desc: "Learn how Gemini enhances productivity across Google Workspace apps." },
+                            { title: "“Take notes for me” in Meet", url: "https://support.google.com/meet/answer/14754931", desc: "Enable 'Notes with Gemini' to auto-generate and save meeting notes in Docs." },
+                            { title: "Collaborate with Gemini in Sheets", url: "https://support.google.com/docs/answer/14356410", desc: "Create tables, generate charts, and perform sheet actions with natural language." },
+                        ]
+                    }
+                }
+            }
+        };
+
+        const webinarsData = [
+            {
+            category: "AI Automation Bootcamp",
+            icon: "graduation-cap",
+            description: "A comprehensive 4-part series on transitioning to an AI-First operating model and building intelligent agents.",
+            items: [
+                { title: "Session 1: Introduction to AI First & Agents", url: "https://drive.google.com/file/d/1HKqBsVuZR2xcs6iWPbewuPu1fs2S_6kO/view", desc: "Introduction: what AI First approaches are and how AI agents function in a business environment." },
+                { title: "Session 2: Process Modeling & Basic Automation", url: "https://drive.google.com/file/d/1oMjtuHpxbClPFsqvJFrnORWFDHezz_nx/view", desc: "How to model AS-IS and TO-BE processes and the basics of foundational automation." },
+                { title: "Session 3: Advanced Automation", url: "https://drive.google.com/file/d/1OIU6ROCKKgm8UqdlsdjRPfLiVXU1K0G6/view", desc: "Advanced automation: complex skill graphs, RAG, and integrations." },
+                { title: "Session 4: Change Management", url: "https://drive.google.com/file/d/1EssfMCK3fMiLoszRvEPhv-BHCY0Wk6DV/view", desc: "Change management during AI agent implementation: culture, security, and responsibility." },
+                { title: "Bootcamp Demo Day", url: "https://drive.google.com/file/d/1yKAK316oRDeUMJ_TPiId0SJBbePLCYbA/view", desc: "Presentation and breakdown of the ready-made solutions built during the bootcamp." }
+            ]
+        },
+        {
+            category: "Engineering & Development",
+                icon: "code",
+                description: "Deep technical sessions on software architecture, code generation, and product development with AI.",
+                items: [
+                    { title: "AI Tooling Demo for Devs", url: "https://drive.google.com/file/d/1-RU6YXeiWfMW_afeUKif0bultCnJMbjr/view", desc: "Experience sharing on using AI tools for coding, discussing tech stacks, and how effective prompts and detailed documentation speed up development from architecture to real-time monitoring." },
+                    { title: "Building Products with AI", url: "https://drive.google.com/file/d/19TxxHl0pJO8Dfr9MmCbxpcy9l22xvHVo/view?usp=sharing", desc: "Webinar on formalizing product/tech requirements, designing system architecture, grooming tasks for AI agents, and Test-driven development with AI." }
+                ]
+            },
+            {
+                category: "Productivity & Operations",
+                icon: "workflow",
+                description: "Workflows and implementations designed to accelerate day-to-day work.",
+                items: [
+                    { title: "Build a Personal Assistant in n8n", url: "https://drive.google.com/file/d/1V4Md0Nn18wztQcD8Hgt-Wv1yH-bwX2c3/view", desc: "Step-by-step guide on creating your own fully functional personal assistant using n8n workflows." },
+                    { title: "Google Gemini: Boost Your Productivity", url: "https://drive.google.com/file/d/1PLf7lMOnDUQ_CbCUGKWJYszXbHQfo0iI/view", desc: "A practical session exploring advanced ways to leverage Google Gemini in everyday corporate tasks." }
+                ]
+            }
+        ];
+
+        // --- DOM ELEMENTS ---
+    const views = {
+        home: document.getElementById('home-view'),
+        tools: document.getElementById('tools-view')
+    };
+    const rolesGrid = document.getElementById('roles-grid');
+    const toolsContainer = document.getElementById('tools-container');
+    const webinarsContainer = document.getElementById('webinars-container');
+
+    // --- CORE FUNCTIONS ---
+
+    function showHome() {
+        views.tools.classList.add('hidden');
+        views.home.classList.remove('hidden');
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        lucide.createIcons();
+    }
+
+    function showTools(roleName) {
+        renderToolsView(roleName);
+        views.home.classList.add('hidden');
+        views.tools.classList.remove('hidden');
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        lucide.createIcons();
+    }
+
+    // --- RENDER FUNCTIONS ---
+
+    function renderRolesView() {
+            rolesGrid.innerHTML = ''; 
+            let delay = 0;
+            for (const [roleName, role] of Object.entries(educationData)) {
+                const card = document.createElement('div');
+                card.className = `visual-card glass-panel p-8 rounded-2xl cursor-pointer flex flex-col items-center text-center animate-fade-in`;
+                card.style.animationDelay = `${delay}ms`;
+                card.innerHTML = `
+                    <div class="mb-5 w-16 h-16 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-unlimit-teal shadow-sm group-hover:scale-110 transition-transform">
+                        <i data-lucide="${role.icon}" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-3 tracking-tight">${roleName}</h3>
+                    <p class="text-slate-600 font-medium leading-relaxed">${role.description}</p>
+                    <div class="mt-6 text-sm font-bold text-unlimit-purple flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                        Explore Tools <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </div>
+                `;
+                card.onclick = () => showTools(roleName);
+                rolesGrid.appendChild(card);
+                delay += 50;
+            }
+        }
+
+        function renderToolsView(roleName) {
+            const role = educationData[roleName];
+            
+            document.getElementById('tools-view-title').textContent = `${roleName} Toolkit`;
+            document.getElementById('tools-view-desc').textContent = role.description;
+            document.getElementById('tools-role-icon').innerHTML = `<i data-lucide="${role.icon}" class="w-10 h-10"></i>`;
+            
+            toolsContainer.innerHTML = ''; 
+            
+            let delay = 0;
+            for (const [toolName, tool] of Object.entries(role.tools)) {
+                const section = document.createElement('div');
+                section.className = "animate-fade-in";
+                section.style.animationDelay = `${delay}ms`;
+                
+                const lessonsHtml = tool.lessons.map(lesson => `
+                    <a href="${lesson.url}" target="_blank" rel="noopener noreferrer" class="block visual-card p-6 rounded-xl hover:border-unlimit-lime transition-all duration-300 h-full flex flex-col group">
+                        <div class="flex items-start gap-4">
+                            <div class="p-2 bg-white rounded-lg shadow-sm shrink-0 border border-slate-100 text-unlimit-teal group-hover:bg-unlimit-teal group-hover:text-white transition-colors">
+                                <i data-lucide="play-circle" class="w-5 h-5"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="text-lg font-bold text-slate-800 leading-tight mb-2 group-hover:text-unlimit-purple transition-colors">${lesson.title}</h4>
+                                <p class="text-sm text-slate-600 font-medium leading-relaxed">${lesson.desc}</p>
+                            </div>
+                            <div class="shrink-0 text-slate-300 group-hover:text-unlimit-purple transition-colors">
+                               <i data-lucide="external-link" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                    </a>
+                `).join('');
+
+                section.innerHTML = `
+                    <div class="flex items-center mb-6 pl-2"> 
+                        <div class="w-10 h-10 mr-4 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-center overflow-hidden shrink-0">
+                            <img src="${tool.icon}" alt="${toolName}" class="w-6 h-6 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <i data-lucide="${tool.lucideIcon || 'box'}" class="w-5 h-5 text-slate-500 hidden"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-slate-800 tracking-tight">${toolName}</h3>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                        ${lessonsHtml}
+                    </div>
+                `;
+                toolsContainer.appendChild(section);
+                delay += 100;
+            }
+        }
+
+        function renderWebinarsView() {
+            webinarsContainer.innerHTML = '';
+            let delay = 0;
+            
+            webinarsData.forEach(category => {
+                const section = document.createElement('div');
+                section.className = "glass-panel p-8 md:p-10 rounded-2xl animate-fade-in";
+                section.style.animationDelay = `${delay}ms`;
+                
+                const itemsHtml = category.items.map(item => `
+                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="visual-card p-5 rounded-xl flex flex-col md:flex-row md:items-center gap-4 group">
+                        <div class="p-3 bg-white border border-slate-100 rounded-xl text-unlimit-purple shadow-sm shrink-0 group-hover:bg-unlimit-purple group-hover:text-white transition-all">
+                            <i data-lucide="video" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-xl font-bold text-slate-800 mb-1 group-hover:text-unlimit-purple transition-colors">${item.title}</h4>
+                            <p class="text-sm text-slate-600 font-medium">${item.desc}</p>
+                        </div>
+                        <div class="shrink-0 text-slate-300 group-hover:text-unlimit-teal hidden md:block transition-colors">
+                            <i data-lucide="arrow-right" class="w-6 h-6"></i>
+                        </div>
+                    </a>
+                `).join('');
+
+                section.innerHTML = `
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="p-2 bg-unlimit-lime/20 rounded-lg border border-unlimit-lime/50 text-unlimit-limeDark">
+                            <i data-lucide="${category.icon}" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">${category.category}</h3>
+                    </div>
+                    <p class="text-slate-600 mb-8 font-medium pl-14">${category.description}</p>
+                    <div class="space-y-4">
+                        ${itemsHtml}
+                    </div>
+                `;
+                webinarsContainer.appendChild(section);
+            delay += 150;
+        });
+    }
+
+    // --- INITIALIZATION ---
+    document.addEventListener('DOMContentLoaded', () => {
+        renderRolesView();
+        renderWebinarsView();
+        showHome();
+    });
+
+</script>
+</body>
+</html>
